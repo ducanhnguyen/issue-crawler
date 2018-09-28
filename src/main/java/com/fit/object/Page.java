@@ -10,13 +10,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class Page extends HashSet<Issue> implements ICrawler {
+public class Page extends HashSet<Issue> implements IGithubIssueCrawler {
 	private URL url;
 
 	public static void main(String[] args) {
-		Page p = new Page(url)
+
 	}
-	
+
 	public HashSet<Issue> getIssueLinks(URL linkPage) {
 		HashSet<Issue> issues = new HashSet<Issue>();
 		Document doc = null;
