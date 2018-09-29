@@ -1,4 +1,4 @@
-package com.fit;
+package com.fit.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -52,5 +52,22 @@ public class Utils {
 				pages += url + "\n";
 
 		Utils.exportToFile(file, pages);
+	}
+
+	public static File normalizePath(File path) {
+		String normalizedPath = new String();
+		try {
+			normalizedPath = path.getCanonicalPath().replace("\\", File.separator).replace("//", File.separator)
+					.replace("/", File.separator);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		File normalizedFile = new File(normalizedPath);
+		
+		// For folder
+		if (normalizedFile.isDirectory())
+			if (!normalizedFile.getAbsolutePath().endsWith(File.separator))
+				normalizedFile = new File(normalizedPath + File.separator);
+		return normalizedFile;
 	}
 }

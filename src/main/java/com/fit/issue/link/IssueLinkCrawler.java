@@ -1,4 +1,4 @@
-package com.fit;
+package com.fit.issue.link;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.fit.LinkCrawler;
 import com.fit.object.IGithubIssueCrawler;
+import com.fit.utils.Utils;
 
 public class IssueLinkCrawler extends LinkCrawler {
 

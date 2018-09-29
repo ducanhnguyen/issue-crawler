@@ -1,4 +1,4 @@
-package com.fit;
+package com.fit.issue.link;
 
 import com.fit.object.IGithubIssueCrawler;
 
