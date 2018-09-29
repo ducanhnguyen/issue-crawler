@@ -38,7 +38,7 @@ public class ContentCrawler extends AbstractCrawler {
 
 	public static void main(String[] args) {
 		ContentCrawler contentCrawler = new ClosedIssueContentCrawler();
-		contentCrawler.setCrawlStrategy(CONTINUOUS_CRAWEL_STRATEGY);
+//		contentCrawler.setCrawlStrategy(CONTINUOUS_CRAWEL_STRATEGY);
 		contentCrawler.setLinksFile(IGithubIssueCrawler.Bitcoin.CLOSED_ISSUE_LINKS_FILE);
 		contentCrawler.setOutputFolder(IGithubIssueCrawler.Bitcoin.CLOSED_ISSUE_CONTENT_FOLDER);
 		contentCrawler.crawl();

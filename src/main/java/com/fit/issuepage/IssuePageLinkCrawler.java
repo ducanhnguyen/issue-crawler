@@ -40,7 +40,7 @@ public class IssuePageLinkCrawler extends LinkCrawler {
 		// Get all issue pages
 		HashSet<URL> issuePages = new HashSet<URL>();
 
-		issuePages = crawler.crawlOpeningIssuePages();
+		issuePages = crawler.crawlIssuePages();
 
 		System.out.println("Export pages done! size = " + issuePages.size());
 	}
@@ -55,19 +55,19 @@ public class IssuePageLinkCrawler extends LinkCrawler {
 	 * @param theFirstIssuePage the first issue page
 	 * @return
 	 */
-	public HashSet<URL> crawlOpeningIssuePages() {
+	public HashSet<URL> crawlIssuePages() {
 		HashSet<URL> issuePages = new HashSet<URL>();
 
 		// load the results of the previous crawls
-		if (getCrawlStrategy() == CONTINUOUS_CRAWEL_STRATEGY && getIssuePageFile().exists()) {
-			List<String> previousUrls = Utils.readFileContent(getIssuePageFile());
-			for (String previousUrl : previousUrls)
-				try {
-					issuePages.add(new URL(previousUrl));
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
-		}
+//		if (getCrawlStrategy() == CONTINUOUS_CRAWEL_STRATEGY && getIssuePageFile().exists()) {
+//			List<String> previousUrls = Utils.readFileContent(getIssuePageFile());
+//			for (String previousUrl : previousUrls)
+//				try {
+//					issuePages.add(new URL(previousUrl));
+//				} catch (MalformedURLException e) {
+//					e.printStackTrace();
+//				}
+//		}
 
 		// crawl new pages
 		if (issuePageFile != null && theFirstIssuePage != null) {

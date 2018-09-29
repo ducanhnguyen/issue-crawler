@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -63,11 +64,31 @@ public class Utils {
 			e.printStackTrace();
 		}
 		File normalizedFile = new File(normalizedPath);
-		
-		// For folder
-		if (normalizedFile.isDirectory())
-			if (!normalizedFile.getAbsolutePath().endsWith(File.separator))
-				normalizedFile = new File(normalizedPath + File.separator);
+
 		return normalizedFile;
 	}
+
+	public static String convertToString(List<String> lines) {
+		String str = new String();
+		for (String line : lines) {
+			str += line + "\n";
+		}
+		return str;
+	}
+
+	public static Set<File> getFilesInAFolder(File folder) {
+		Set<File> files = new HashSet<File>();
+
+		File[] listOfFiles = folder.listFiles();
+
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				files.add(listOfFiles[i]);
+			} else if (listOfFiles[i].isDirectory()) {
+				// ignore
+			}
+		}
+		return files;
+	}
+
 }

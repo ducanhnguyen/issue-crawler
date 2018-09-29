@@ -26,7 +26,7 @@ public class OpeningIssuePageLinkCrawler extends IssuePageLinkCrawler {
 		// Get all issue pages
 		HashSet<URL> issuePages = new HashSet<URL>();
 
-		issuePages = crawler.crawlOpeningIssuePages();
+		issuePages = crawler.crawlIssuePages();
 
 		System.out.println("Export pages done! size = " + issuePages.size());
 	}

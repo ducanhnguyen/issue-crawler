@@ -15,6 +15,8 @@ public interface IGithubIssueCrawler {
 		File CLOSED_ISSUE_LINKS_FILE = Utils.normalizePath(new File("./crawl_data/bitcoin/closed_issue_links.txt"));
 		File CLOSED_ISSUE_CONTENT_FOLDER = Utils.normalizePath(new File("./crawl_data/bitcoin/closed_issues"));
 
+		File ISSUE_RELATED_API_FILE = Utils.normalizePath(new File("./crawl_data/bitcoin/api.csv"));
+
 		String ISSUE_REPO_BITCOIN_URL = "https:/github.com/bitcoin/bitcoin/issues";
 	}
 
