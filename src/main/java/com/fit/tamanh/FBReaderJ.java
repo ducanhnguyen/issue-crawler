@@ -1,4 +1,4 @@
-package com.fit.mycrawler;
+package com.fit.tamanh;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;

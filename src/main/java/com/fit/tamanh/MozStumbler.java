@@ -1,4 +1,4 @@
-package com.fit.mycrawler;
+package com.fit.tamanh;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,63 +14,63 @@ import com.fit.issuepage.ClosedIssuePageLinkCrawler;
 import com.fit.issuepage.IssuePageLinkCrawler;
 
 /**
- * Githublink: PressureNet https://github.com/Cbsoftware/PressureNet <br/>
+ * Githublink: MozStumbler https://github.com/mozilla/MozStumbler <br/>
  * 
  * @author Duc-Anh Nguyen
  *
  */
-public class PressureNet {
-	public PressureNet() {
+public class MozStumbler {
+	public MozStumbler() {
 	}
 
 	public static void main(String[] args) {
-		PressureNet crawler = new PressureNet();
+		MozStumbler crawler = new MozStumbler();
 
 		// crawl issue page links
-		crawler.crawlIssuePages("https://github.com/Cbsoftware/PressureNet/issues",
-				new File("./crawl_data/PressureNet/closed_issue_pages.txt"), "&q=is%3Aissue+is%3Aclosed");
-		crawler.crawlIssuePages("https://github.com/Cbsoftware/PressureNet/issues",
-				new File("./crawl_data/PressureNet/opening_issue_pages.txt"), "&q=is%3Aopen+is%3Aissue");
+		crawler.crawlIssuePages("https://github.com/mozilla/MozStumbler/issues",
+				new File("./crawl_data/MozStumbler/closed_issue_pages.txt"), "&q=is%3Aissue+is%3Aclosed");
+		crawler.crawlIssuePages("https://github.com/mozilla/MozStumbler/issues",
+				new File("./crawl_data/MozStumbler/opening_issue_pages.txt"), "&q=is%3Aopen+is%3Aissue");
 
 		// crawl closed issue links
 		IssueLinkCrawler closedIssueCrawler = new ClosedIssueLinksCrawler();
-		closedIssueCrawler.setIssuePageLinkFile(new File("./crawl_data/PressureNet/closed_issue_pages.txt"));
+		closedIssueCrawler.setIssuePageLinkFile(new File("./crawl_data/MozStumbler/closed_issue_pages.txt"));
 		closedIssueCrawler.setBaseIssueLinkPath("https://github.com");
-		closedIssueCrawler.setIssueLinksFile(new File("./crawl_data/PressureNet/closed_issue_links.txt"));
+		closedIssueCrawler.setIssueLinksFile(new File("./crawl_data/MozStumbler/closed_issue_links.txt"));
 		closedIssueCrawler.crawl();
 
 		// crawl opening issue links
 		IssueLinkCrawler openingIssueCrawler = new ClosedIssueLinksCrawler();
-		openingIssueCrawler.setIssuePageLinkFile(new File("./crawl_data/PressureNet/opening_issue_pages.txt"));
+		openingIssueCrawler.setIssuePageLinkFile(new File("./crawl_data/MozStumbler/opening_issue_pages.txt"));
 		openingIssueCrawler.setBaseIssueLinkPath("https://github.com");
-		openingIssueCrawler.setIssueLinksFile(new File("./crawl_data/PressureNet/opening_issue_links.txt"));
+		openingIssueCrawler.setIssueLinksFile(new File("./crawl_data/MozStumbler/opening_issue_links.txt"));
 		openingIssueCrawler.crawl();
 
 		// crawl closed issue content
 		ContentCrawler contentCrawler = new ClosedIssueContentCrawler();
-		contentCrawler.setLinksFile(new File("./crawl_data/PressureNet/closed_issue_links.txt"));
-		contentCrawler.setOutputFolder(new File("./crawl_data/PressureNet/closed_issues"));
+		contentCrawler.setLinksFile(new File("./crawl_data/MozStumbler/closed_issue_links.txt"));
+		contentCrawler.setOutputFolder(new File("./crawl_data/MozStumbler/closed_issues"));
 		contentCrawler.crawl();
 
 		// crawl opening issue content
 		ContentCrawler contentCrawler2 = new OpeningIssueContentCrawler();
-		contentCrawler2.setLinksFile(new File("./crawl_data/PressureNet/opening_issue_links.txt"));
-		contentCrawler2.setOutputFolder(new File("./crawl_data/PressureNet/opening_issues"));
+		contentCrawler2.setLinksFile(new File("./crawl_data/MozStumbler/opening_issue_links.txt"));
+		contentCrawler2.setOutputFolder(new File("./crawl_data/MozStumbler/opening_issues"));
 		contentCrawler2.crawl();
 
 		// Filter closed issues related to API version
 		IssueRelatedApiVersionFilter closedFilter = new IssueRelatedApiVersionFilter();
-		closedFilter.setIssueFolder(new File("./crawl_data/PressureNet/closed_issues"));
-		closedFilter.setBaseIssueRepo("https://github.com/Cbsoftware/PressureNet/issues");
-		closedFilter.setOutputCsvFile(new File("./crawl_data/PressureNet/api.csv"));
+		closedFilter.setIssueFolder(new File("./crawl_data/MozStumbler/closed_issues"));
+		closedFilter.setBaseIssueRepo("https://github.com/mozilla/MozStumbler/issues");
+		closedFilter.setOutputCsvFile(new File("./crawl_data/MozStumbler/api.csv"));
 		closedFilter.setIssueType("closed");
 		closedFilter.appendToCsvFile(closedFilter.filter());
 
 		// Filter closed issues related to API version
 		IssueRelatedApiVersionFilter openingFilter = new IssueRelatedApiVersionFilter();
-		openingFilter.setIssueFolder(new File("./crawl_data/PressureNet/opening_issues"));
-		openingFilter.setBaseIssueRepo("https://github.com/Cbsoftware/PressureNet/issues");
-		openingFilter.setOutputCsvFile(new File("./crawl_data/PressureNet/api.csv"));
+		openingFilter.setIssueFolder(new File("./crawl_data/MozStumbler/opening_issues"));
+		openingFilter.setBaseIssueRepo("https://github.com/mozilla/MozStumbler/issues");
+		openingFilter.setOutputCsvFile(new File("./crawl_data/MozStumbler/api.csv"));
 		openingFilter.setIssueType("opening");
 		openingFilter.appendToCsvFile(openingFilter.filter());
 	}

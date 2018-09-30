@@ -79,19 +79,22 @@ public class IssueRelatedApiVersionFilter extends AbstractIssueFilter {
 							// Get the sentence containing the related API token
 							int pos = clonedText.indexOf(apiVersionSignal);
 
-							int startPos = pos;
-							for (; startPos >= 0; startPos--)
-								if (clonedText.toCharArray()[startPos] == '.') {
-									break;
-								}
+							int length = 200;
+							int startPos = pos - length / 2 < 0 ? 0 : pos - length / 2;
+							int endPos = pos + length / 2 > clonedText.length() - 1 ? clonedText.length() - 1
+									: pos + length / 2;
+							String apiRelatedSentence = clonedText.substring(startPos, endPos);
 
-							int endPos = pos;
-							for (; endPos < clonedText.length() - 1; endPos++)
-								if (clonedText.toCharArray()[endPos] == '.') {
-									break;
-								}
-
-							String apiRelatedSentence = clonedText.substring(startPos + 1, endPos + 1);
+//							for (; startPos >= 0; startPos--)
+//								if (clonedText.toCharArray()[startPos] == '.') {
+//									break;
+//								}
+//
+//							for (; endPos < clonedText.length() - 1; endPos++)
+//								if (clonedText.toCharArray()[endPos] == '.') {
+//									break;
+//								}
+//							String apiRelatedSentence = clonedText.substring(startPos + 1, endPos + 1);
 
 							// Add to output set
 							ApiVersion api = new ApiVersion();
@@ -171,6 +174,9 @@ public class IssueRelatedApiVersionFilter extends AbstractIssueFilter {
 		this.issueType = issueType;
 	}
 
-	public static final String[] API_VERSION_SIGNALS = new String[] { "incompatible API", "conflict API",
-			"API conflict", "API change", "API version change" };
+	public static final String[] API_VERSION_SIGNALS = new String[] { " API ", " API' "
+			/*
+			 * "incompatible API", "conflict API", "API conflict", "API change",
+			 * "API version change"
+			 */ };
 }

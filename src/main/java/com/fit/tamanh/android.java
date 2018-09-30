@@ -1,5 +1,4 @@
-package com.fit.mycrawler;
-
+package com.fit.tamanh;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -15,64 +14,63 @@ import com.fit.issuepage.ClosedIssuePageLinkCrawler;
 import com.fit.issuepage.IssuePageLinkCrawler;
 
 /**
- * Githublink: Wordpress-Android
- * https://github.com/wordpress-mobile/WordPress-Android
+ * Githublink: surespot https://github.com/surespot/android <br/>
  * 
  * @author Duc-Anh Nguyen
  *
  */
-public class Wordpress_Android {
-	public Wordpress_Android() {
+public class android {
+	public android() {
 	}
 
 	public static void main(String[] args) {
-		Wordpress_Android crawler = new Wordpress_Android();
+		android crawler = new android();
 
 		// crawl issue page links
-		crawler.crawlIssuePages("https://github.com/wordpress-mobile/WordPress-Android/issues",
-				new File("./crawl_data/WordPress-Android/closed_issue_pages.txt"), "&q=is%3Aissue+is%3Aclosed");
-		crawler.crawlIssuePages("https://github.com/wordpress-mobile/WordPress-Android/issues",
-				new File("./crawl_data/WordPress-Android/opening_issue_pages.txt"), "&q=is%3Aopen+is%3Aissue");
+		crawler.crawlIssuePages("https://github.com/surespot/android/issues",
+				new File("./crawl_data/android/closed_issue_pages.txt"), "&q=is%3Aissue+is%3Aclosed");
+		crawler.crawlIssuePages("https://github.com/surespot/android/issues",
+				new File("./crawl_data/android/opening_issue_pages.txt"), "&q=is%3Aopen+is%3Aissue");
 
 		// crawl closed issue links
 		IssueLinkCrawler closedIssueCrawler = new ClosedIssueLinksCrawler();
-		closedIssueCrawler.setIssuePageLinkFile(new File("./crawl_data/WordPress-Android/closed_issue_pages.txt"));
+		closedIssueCrawler.setIssuePageLinkFile(new File("./crawl_data/android/closed_issue_pages.txt"));
 		closedIssueCrawler.setBaseIssueLinkPath("https://github.com");
-		closedIssueCrawler.setIssueLinksFile(new File("./crawl_data/WordPress-Android/closed_issue_links.txt"));
+		closedIssueCrawler.setIssueLinksFile(new File("./crawl_data/android/closed_issue_links.txt"));
 		closedIssueCrawler.crawl();
 
 		// crawl opening issue links
 		IssueLinkCrawler openingIssueCrawler = new ClosedIssueLinksCrawler();
-		openingIssueCrawler.setIssuePageLinkFile(new File("./crawl_data/WordPress-Android/opening_issue_pages.txt"));
+		openingIssueCrawler.setIssuePageLinkFile(new File("./crawl_data/android/opening_issue_pages.txt"));
 		openingIssueCrawler.setBaseIssueLinkPath("https://github.com");
-		openingIssueCrawler.setIssueLinksFile(new File("./crawl_data/WordPress-Android/opening_issue_links.txt"));
+		openingIssueCrawler.setIssueLinksFile(new File("./crawl_data/android/opening_issue_links.txt"));
 		openingIssueCrawler.crawl();
 
 		// crawl closed issue content
 		ContentCrawler contentCrawler = new ClosedIssueContentCrawler();
-		contentCrawler.setLinksFile(new File("./crawl_data/WordPress-Android/closed_issue_links.txt"));
-		contentCrawler.setOutputFolder(new File("./crawl_data/WordPress-Android/closed_issues"));
+		contentCrawler.setLinksFile(new File("./crawl_data/android/closed_issue_links.txt"));
+		contentCrawler.setOutputFolder(new File("./crawl_data/android/closed_issues"));
 		contentCrawler.crawl();
 
 		// crawl opening issue content
 		ContentCrawler contentCrawler2 = new OpeningIssueContentCrawler();
-		contentCrawler2.setLinksFile(new File("./crawl_data/WordPress-Android/opening_issue_links.txt"));
-		contentCrawler2.setOutputFolder(new File("./crawl_data/WordPress-Android/opening_issues"));
+		contentCrawler2.setLinksFile(new File("./crawl_data/android/opening_issue_links.txt"));
+		contentCrawler2.setOutputFolder(new File("./crawl_data/android/opening_issues"));
 		contentCrawler2.crawl();
 
 		// Filter closed issues related to API version
 		IssueRelatedApiVersionFilter closedFilter = new IssueRelatedApiVersionFilter();
-		closedFilter.setIssueFolder(new File("./crawl_data/WordPress-Android/closed_issues"));
-		closedFilter.setBaseIssueRepo("https://github.com/wordpress-mobile/WordPress-Android/issues");
-		closedFilter.setOutputCsvFile(new File("./crawl_data/WordPress-Android/api.csv"));
+		closedFilter.setIssueFolder(new File("./crawl_data/android/closed_issues"));
+		closedFilter.setBaseIssueRepo("https://github.com/surespot/android/issues");
+		closedFilter.setOutputCsvFile(new File("./crawl_data/android/api.csv"));
 		closedFilter.setIssueType("closed");
 		closedFilter.appendToCsvFile(closedFilter.filter());
 
 		// Filter closed issues related to API version
 		IssueRelatedApiVersionFilter openingFilter = new IssueRelatedApiVersionFilter();
-		openingFilter.setIssueFolder(new File("./crawl_data/WordPress-Android/opening_issues"));
-		openingFilter.setBaseIssueRepo("https://github.com/wordpress-mobile/WordPress-Android/issues");
-		openingFilter.setOutputCsvFile(new File("./crawl_data/WordPress-Android/api.csv"));
+		openingFilter.setIssueFolder(new File("./crawl_data/android/opening_issues"));
+		openingFilter.setBaseIssueRepo("https://github.com/surespot/android/issues");
+		openingFilter.setOutputCsvFile(new File("./crawl_data/android/api.csv"));
 		openingFilter.setIssueType("opening");
 		openingFilter.appendToCsvFile(openingFilter.filter());
 	}
