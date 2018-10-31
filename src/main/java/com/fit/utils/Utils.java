@@ -13,6 +13,36 @@ import java.util.List;
 import java.util.Set;
 
 public class Utils {
+	public static void appendToFile(File file, String content) {
+		BufferedWriter bw = null;
+		FileWriter fw = null;
+
+		if (!file.exists())
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		try {
+			fw = new FileWriter(file, true);
+			bw = new BufferedWriter(fw);
+			bw.write(content);
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (bw != null)
+					bw.close();
+				if (fw != null)
+					fw.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
 	public static List<String> readFileContent(File file) {
 		List<String> content = new ArrayList<String>();
 		try {
